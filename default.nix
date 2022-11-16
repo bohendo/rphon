@@ -16,7 +16,7 @@ pkgs.stdenv.mkDerivation rec {
   ];
 
   buildPhase = ''
-    tsc index.ts
+    ${pkgs.nodePackages.typescript}/bin/tsc index.ts
   '';
 
   installPhase = ''
