@@ -1,0 +1,24 @@
+{
+  "name": "phonetic",
+  "version": "1.0.0",
+  "description": "random phonem generator",
+  "main": "dist/print.js",
+  "files": ["dist/print.js", "dist/server.js"],
+  "bin": {
+    "phonetic": "dist/print.js",
+    "serve-phonetic": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo 'looks good'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://onedev/phonetic"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
