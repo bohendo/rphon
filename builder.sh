@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-nix-shell -p node2nix --run 'node2nix --nodejs-16 --input package.json --lock package-lock.json --composition node-modules.nix'
+npm install --package-lock-only
 
-#if [[ ! -f "node-packages.nix" ]]
-#then nix-shell -p node2nix --run 'node2nix --nodejs-16 --input package.json --lock package-lock.json'
-#fi
+nix-shell -p node2nix --run 'node2nix --nodejs-16 --input package.json --lock package-lock.json --composition node-modules.nix'
 
 nix-build
 

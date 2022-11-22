@@ -22,12 +22,15 @@ in
     ];
 
     buildPhase = ''
-      ${pkgs.nodePackages.typescript}/bin/tsc --typeroots ${node-modules}/lib/node_modules/@types
+      rm dist/*
+      ln -s ${node-modules}/lib/node_modules ./node_modules
+      ${pkgs.nodePackages.typescript}/bin/tsc
     '';
 
     installPhase = ''
       mkdir -p $out/bin
       mv dist/index.js $out/bin/rphon
+      ln -s ${node-modules}/lib/node_modules $out/bin/node_modules
       chmod +x $out/bin/rphon
     '';
 

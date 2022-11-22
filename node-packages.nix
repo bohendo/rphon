@@ -13,6 +13,15 @@ let
         sha512 = "6Xytlwvy6Rn3U3gKEc1vP7nR92frHkv6wtVr95LFR3jREXiCPzdWxKQ1cx4JGQBXxcguAwjA8murlYN2TSiEbg==";
       };
     };
+    "@ethersproject/bignumber-5.7.0" = {
+      name = "_at_ethersproject_slash_bignumber";
+      packageName = "@ethersproject/bignumber";
+      version = "5.7.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@ethersproject/bignumber/-/bignumber-5.7.0.tgz";
+        sha512 = "n1CAdIHRWjSucQO3MC1zPSVgV/6dy/fjL9pMrPP9peL+QxEg9wOsVqwD4+818B6LUEtaXzVHQiuivzRoxPxUGw==";
+      };
+    };
     "@ethersproject/bytes-5.7.0" = {
       name = "_at_ethersproject_slash_bytes";
       packageName = "@ethersproject/bytes";
@@ -22,6 +31,15 @@ let
         sha512 = "nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==";
       };
     };
+    "@ethersproject/constants-5.7.0" = {
+      name = "_at_ethersproject_slash_constants";
+      packageName = "@ethersproject/constants";
+      version = "5.7.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@ethersproject/constants/-/constants-5.7.0.tgz";
+        sha512 = "DHI+y5dBNvkpYUMiRQyxRBYBefZkJfo70VUkUAsRjcPs47muV9evftfZ0PJVCXYbAiCgght0DtcF9srFQmIgWA==";
+      };
+    };
     "@ethersproject/logger-5.7.0" = {
       name = "_at_ethersproject_slash_logger";
       packageName = "@ethersproject/logger";
@@ -29,6 +47,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/@ethersproject/logger/-/logger-5.7.0.tgz";
         sha512 = "0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==";
+      };
+    };
+    "@ethersproject/units-5.5.0" = {
+      name = "_at_ethersproject_slash_units";
+      packageName = "@ethersproject/units";
+      version = "5.5.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@ethersproject/units/-/units-5.5.0.tgz";
+        sha512 = "7+DpjiZk4v6wrikj+TCyWWa9dXLNU73tSTa7n0TSJDxkYbV3Yf1eRh9ToMLlZtuctNYu9RDNNy2USq3AdqSbag==";
       };
     };
     "@types/node-18.11.9" = {
@@ -49,6 +76,15 @@ let
         sha512 = "c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==";
       };
     };
+    "bn.js-5.2.1" = {
+      name = "bn.js";
+      packageName = "bn.js";
+      version = "5.2.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/bn.js/-/bn.js-5.2.1.tgz";
+        sha512 = "eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==";
+      };
+    };
   };
   args = {
     name = "rphon";
@@ -58,7 +94,14 @@ let
     dependencies = [
       sources."@ethersproject/bignumber-5.5.0"
       sources."@ethersproject/bytes-5.7.0"
+      (sources."@ethersproject/constants-5.7.0" // {
+        dependencies = [
+          sources."@ethersproject/bignumber-5.7.0"
+          sources."bn.js-5.2.1"
+        ];
+      })
       sources."@ethersproject/logger-5.7.0"
+      sources."@ethersproject/units-5.5.0"
       sources."@types/node-18.11.9"
       sources."bn.js-4.12.0"
     ];

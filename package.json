@@ -16,6 +16,7 @@
   "scripts": {},
   "dependencies": {
     "@ethersproject/bignumber": "5.5.0",
+    "@ethersproject/units": "5.5.0",
     "@types/node": "18.11.9"
   }
 }
