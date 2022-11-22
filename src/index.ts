@@ -23,18 +23,24 @@ if (isNaN(nwords)) {
 const verbose = process.argv[3] === "--verbose";
 
 if (verbose) {
+  const prettyAmt = (amt) => commify(formatUnits(amt, 3));
+  const msPerYear = 1000 * 60 * 60 * 24 * 365;
+  const prettyTime = (ms: BigNumber) => ms.gt(BigNumber.from(msPerYear))
+    ? `${commify(ms.div(msPerYear).toString())} years`
+    : `${commify(formatUnits(ms, 3))} seconds`;
   console.log(`Creating a random phonetic phrase with ${nwords} words`);
   const options = BigNumber.from("65536").pow(nwords);
   const sciOptions = `${options.toString().substr(0, 2).split("").join(".")}e${options.toString().length - 1}`;
   // Bitcoin hashrate is currently ~250 Exahashes per second
-  const crackTime = options.mul(1000).div(BigNumber.from("250000000000000000000")); // ms
+  const btcCrackTime = options.mul(1000).div(BigNumber.from("250000000000000000000")); // ms
+  // My cpu was benchmarked at 50k checks/second, round this up to 1M to be safe
+  const joeCrackTime = options.mul(1000).div(BigNumber.from("1000000")); // ms
   // 6.25 BTC per 10 minutes. At $10k/BTC, profit is $6.25k/minute or ~ $100/second
-  const crackCostPerSecond = BigNumber.from(100);
-  const crackCost = crackTime.mul(crackCostPerSecond);
-  const prettify = (num) => commify(formatUnits(num, 3));
+  const crackCost = btcCrackTime.mul(BigNumber.from(100));
   console.log(`dictionary of 65536 ^ ${nwords} words = ${sciOptions} options`);
-  console.log(`Bitcoin miners could crack this password in ${prettify(crackTime)} seconds`);
-  console.log(`This password would cost about $${prettify(crackCost)} to crack`);
+  console.log(`Average Joe could crack this password in ${prettyTime(joeCrackTime)}`);
+  console.log(`Bitcoin miners could crack this password in ${prettyTime(btcCrackTime)}`);
+  console.log(`This password would cost miners about $${prettyAmt(crackCost)} to crack`);
   console.log();
 }
 
