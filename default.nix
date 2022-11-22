@@ -11,7 +11,7 @@ in
 
   pkgs.stdenv.mkDerivation rec {
     pname = "rphon";
-    version = "0.0.1";
+    version = "1.0.0";
 
     src = ./.;
 
@@ -22,7 +22,7 @@ in
     ];
 
     buildPhase = ''
-      rm dist/*
+      rm -rf dist/*
       ln -s ${node-modules}/lib/node_modules ./node_modules
       ${pkgs.nodePackages.typescript}/bin/tsc
     '';
