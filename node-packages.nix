@@ -31,6 +31,15 @@ let
         sha512 = "0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==";
       };
     };
+    "@types/node-18.11.9" = {
+      name = "_at_types_slash_node";
+      packageName = "@types/node";
+      version = "18.11.9";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@types/node/-/node-18.11.9.tgz";
+        sha512 = "CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==";
+      };
+    };
     "bn.js-4.12.0" = {
       name = "bn.js";
       packageName = "bn.js";
@@ -50,6 +59,7 @@ let
       sources."@ethersproject/bignumber-5.5.0"
       sources."@ethersproject/bytes-5.7.0"
       sources."@ethersproject/logger-5.7.0"
+      sources."@types/node-18.11.9"
       sources."bn.js-4.12.0"
     ];
     buildInputs = globalBuildInputs;
@@ -59,7 +69,7 @@ let
     };
     production = true;
     bypassCache = true;
-    reconstructLock = true;
+    reconstructLock = false;
   };
 in
 {

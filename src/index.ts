@@ -12,14 +12,8 @@ const suffixes = 'zodnecbudwessevpersutletfulpensytdurwepserwylsunrypsyxdyrnuphe
 ////////////////////////////////////////
 // Parse CLI Args
 
-let nwords = process.argv[2];
-if (!nwords) {
-  nwords = "4";
-}
-try {
-  nwords = parseInt(nwords.toString());
-  if (isNaN(nwords)) throw new Error();
-} catch (e) {
+const nwords = process.argv[2] ? parseInt(process.argv[2]) : 4;
+if (isNaN(nwords)) {
   console.log(`Got invalid number of words: "${nwords}", expected a number eg "4"`);
   process.exit(1);
 }
@@ -31,9 +25,9 @@ if (verbose) {
   const space = (65536 ** nwords).toString();
   console.log(`dictionary of 65536 ^ ${nwords} words = ${space} aka ${space.substr(0, 1)} * 10 ^ ${space.length} options`);
   const btcHashrate = 250000000000000 // * 10^6 but that's too big so round to nearest billion
+  console.log();
 }
 
-verbose && console.log(`Creating a random phonetic phrase with ${nwords} words`);
 
 ////////////////////////////////////////
 // Define helper function
