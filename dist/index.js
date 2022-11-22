@@ -1,15 +1,45 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 "use strict";
-const prefixes = 'dozmarbinwansamlitsighidfidlissogdirwacsabwissibrigsoldopmodfoglidhopdardorlorhodfolrintogsilmirholpaslacrovlivdalsatlibtabhanticpidtorbolfosdotlosdilforpilramtirwintadbicdifrocwidbisdasmidloprilnardapmolsanlocnovsitnidtipsicropwitnatpanminritpodmottamtolsavposnapnopsomfinfonbanmorworsipronnorbotwicsocwatdolmagpicdavbidbaltimtasmalligsivtagpadsaldivdactansidfabtarmonranniswolmispallasdismaprabtobrollatlonnodnavfignomnibpagsopralbilhaddocridmocpacravripfaltodtiltinhapmicfanpattaclabmogsimsonpinlomrictapfirhasbosbatpochactidhavsaplindibhosdabbitbarracparloddosbortochilmactomdigfilfasmithobharmighinradmashalraglagfadtopmophabnilnosmilfopfamdatnoldinhatnacrisfotribhocnimlarfitwalrapsarnalmoslandondanladdovrivbacpollaptalpitnambonrostonfodponsovnocsorlavmatmipfip';
-// console.log(`prefixes length: ${prefixes.length} aka ${prefixes.length / 3}`)
-const suffixes = 'zodnecbudwessevpersutletfulpensytdurwepserwylsunrypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnexlunmeplutseppesdelsulpedtemledtulmetwenbynhexfebpyldulhetmevruttylwydtepbesdexsefwycburderneppurrysrebdennutsubpetrulsynregtydsupsemwynrecmegnetsecmulnymtevwebsummutnyxrextebfushepbenmuswyxsymselrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpelsyptermebsetdutdegtexsurfeltudnuxruxrenwytnubmedlytdusnebrumtynseglyxpunresredfunrevrefmectedrusbexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermertenlusnussyltecmexpubrymtucfyllepdebbermughuttunbylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmylwedducfurfexnulluclennerlexrupnedlecrydlydfenwelnydhusrelrudneshesfetdesretdunlernyrsebhulrylludremlysfynwerrycsugnysnyllyndyndemluxfedsedbecmunlyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes';
-// console.log(`suffixes length: ${suffixes.length} aka ${suffixes.length / 3}`)
-const getRandomByte = () => Math.floor(Math.random() * 256);
-const grn = () => {
-    const i = getRandomByte() * 3;
-    const j = getRandomByte() * 3;
-    const name = `${prefixes.substring(i, i + 3)}${suffixes.substring(j, j + 3)}`;
-    console.log(`${i} + ${j} = ${name}`);
+exports.__esModule = true;
+var crypto_1 = require("crypto");
+////////////////////////////////////////
+// Define Constants
+var prefixes = 'dozmarbinwansamlitsighidfidlissogdirwacsabwissibrigsoldopmodfoglidhopdardorlorhodfolrintogsilmirholpaslacrovlivdalsatlibtabhanticpidtorbolfosdotlosdilforpilramtirwintadbicdifrocwidbisdasmidloprilnardapmolsanlocnovsitnidtipsicropwitnatpanminritpodmottamtolsavposnapnopsomfinfonbanmorworsipronnorbotwicsocwatdolmagpicdavbidbaltimtasmalligsivtagpadsaldivdactansidfabtarmonranniswolmispallasdismaprabtobrollatlonnodnavfignomnibpagsopralbilhaddocridmocpacravripfaltodtiltinhapmicfanpattaclabmogsimsonpinlomrictapfirhasbosbatpochactidhavsaplindibhosdabbitbarracparloddosbortochilmactomdigfilfasmithobharmighinradmashalraglagfadtopmophabnilnosmilfopfamdatnoldinhatnacrisfotribhocnimlarfitwalrapsarnalmoslandondanladdovrivbacpollaptalpitnambonrostonfodponsovnocsorlavmatmipfip';
+var suffixes = 'zodnecbudwessevpersutletfulpensytdurwepserwylsunrypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnexlunmeplutseppesdelsulpedtemledtulmetwenbynhexfebpyldulhetmevruttylwydtepbesdexsefwycburderneppurrysrebdennutsubpetrulsynregtydsupsemwynrecmegnetsecmulnymtevwebsummutnyxrextebfushepbenmuswyxsymselrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpelsyptermebsetdutdegtexsurfeltudnuxruxrenwytnubmedlytdusnebrumtynseglyxpunresredfunrevrefmectedrusbexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermertenlusnussyltecmexpubrymtucfyllepdebbermughuttunbylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmylwedducfurfexnulluclennerlexrupnedlecrydlydfenwelnydhusrelrudneshesfetdesretdunlernyrsebhulrylludremlysfynwerrycsugnysnyllyndyndemluxfedsedbecmunlyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes';
+////////////////////////////////////////
+// Parse CLI Args
+var nwords = process.argv[2];
+if (!nwords) {
+    nwords = "4";
+}
+try {
+    nwords = parseInt(nwords.toString());
+    if (isNaN(nwords))
+        throw new Error();
+}
+catch (e) {
+    console.log("Got invalid number of words: \"".concat(nwords, "\", expected a number eg \"4\""));
+    process.exit(1);
+}
+var verbose = process.argv[3] === "--verbose";
+if (verbose) {
+    console.log("Creating a random phonetic phrase with ".concat(nwords, " words"));
+    var space = (Math.pow(65536, nwords)).toString();
+    console.log("dictionary of 65536 ^ ".concat(nwords, " words = ").concat(space, " aka ").concat(space.substr(0, 1), " * 10 ^ ").concat(space.length, " options"));
+    var btcHashrate = 250000000000000; // * 10^6 but that's too big so round to nearest billion
+}
+verbose && console.log("Creating a random phonetic phrase with ".concat(nwords, " words"));
+////////////////////////////////////////
+// Define helper function
+var word = function () {
+    var i = (0, crypto_1.randomInt)(0, 255) * 3;
+    var j = (0, crypto_1.randomInt)(0, 255) * 3;
+    var name = "".concat(prefixes.substring(i, i + 3)).concat(suffixes.substring(j, j + 3));
+    verbose && console.log("".concat(i, " + ").concat(j, " = ").concat(name));
     return name;
 };
-console.log(`Random name: ${grn()}-${grn()}-${grn()}-${grn()}`);
+////////////////////////////////////////
+// Do the thing
+var randomName = Array(nwords).fill(0).map(word).join("-");
+verbose && console.log();
+console.log(randomName);

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { randomInt } from "crypto";
+
 ////////////////////////////////////////
 // Define Constants
 
@@ -24,15 +26,21 @@ try {
 
 const verbose = process.argv[3] === "--verbose";
 
+if (verbose) {
+  console.log(`Creating a random phonetic phrase with ${nwords} words`);
+  const space = (65536 ** nwords).toString();
+  console.log(`dictionary of 65536 ^ ${nwords} words = ${space} aka ${space.substr(0, 1)} * 10 ^ ${space.length} options`);
+  const btcHashrate = 250000000000000 // * 10^6 but that's too big so round to nearest billion
+}
+
 verbose && console.log(`Creating a random phonetic phrase with ${nwords} words`);
 
 ////////////////////////////////////////
 // Define helper function
 
-const word = () => {
-  const getRandomByte = () => Math.floor(Math.random() * 256);
-  const i = getRandomByte() * 3;
-  const j = getRandomByte() * 3;
+const word = (): string => {
+  const i = randomInt(0, 255) * 3;
+  const j = randomInt(0, 255) * 3;
   const name = `${prefixes.substring(i, i+3)}${suffixes.substring(j, j+3)}`;
   verbose && console.log(`${i} + ${j} = ${name}`)
   return name;
@@ -41,6 +49,6 @@ const word = () => {
 ////////////////////////////////////////
 // Do the thing
 
-const randomName = Array(nwords).fill(0).map(word).join("-");
+const randomName = (Array(nwords) as any[]).fill(0).map(word).join("-");
 verbose && console.log();
 console.log(randomName)
