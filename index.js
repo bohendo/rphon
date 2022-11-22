@@ -1,19 +1,46 @@
-#!/usr/bin/node
+#!/usr/bin/env node
+
+////////////////////////////////////////
+// Define Constants
 
 const prefixes = 'dozmarbinwansamlitsighidfidlissogdirwacsabwissibrigsoldopmodfoglidhopdardorlorhodfolrintogsilmirholpaslacrovlivdalsatlibtabhanticpidtorbolfosdotlosdilforpilramtirwintadbicdifrocwidbisdasmidloprilnardapmolsanlocnovsitnidtipsicropwitnatpanminritpodmottamtolsavposnapnopsomfinfonbanmorworsipronnorbotwicsocwatdolmagpicdavbidbaltimtasmalligsivtagpadsaldivdactansidfabtarmonranniswolmispallasdismaprabtobrollatlonnodnavfignomnibpagsopralbilhaddocridmocpacravripfaltodtiltinhapmicfanpattaclabmogsimsonpinlomrictapfirhasbosbatpochactidhavsaplindibhosdabbitbarracparloddosbortochilmactomdigfilfasmithobharmighinradmashalraglagfadtopmophabnilnosmilfopfamdatnoldinhatnacrisfotribhocnimlarfitwalrapsarnalmoslandondanladdovrivbacpollaptalpitnambonrostonfodponsovnocsorlavmatmipfip'
-// console.log(`prefixes length: ${prefixes.length} aka ${prefixes.length / 3}`)
 
 const suffixes = 'zodnecbudwessevpersutletfulpensytdurwepserwylsunrypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnexlunmeplutseppesdelsulpedtemledtulmetwenbynhexfebpyldulhetmevruttylwydtepbesdexsefwycburderneppurrysrebdennutsubpetrulsynregtydsupsemwynrecmegnetsecmulnymtevwebsummutnyxrextebfushepbenmuswyxsymselrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpelsyptermebsetdutdegtexsurfeltudnuxruxrenwytnubmedlytdusnebrumtynseglyxpunresredfunrevrefmectedrusbexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermertenlusnussyltecmexpubrymtucfyllepdebbermughuttunbylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmylwedducfurfexnulluclennerlexrupnedlecrydlydfenwelnydhusrelrudneshesfetdesretdunlernyrsebhulrylludremlysfynwerrycsugnysnyllyndyndemluxfedsedbecmunlyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes'
-// console.log(`suffixes length: ${suffixes.length} aka ${suffixes.length / 3}`)
 
-const getRandomByte = () => Math.floor(Math.random() * 256);
+////////////////////////////////////////
+// Parse CLI Args
 
-const grn = () => {
+let nwords = process.argv[2];
+if (!nwords) {
+  nwords = "4";
+}
+try {
+  nwords = parseInt(nwords.toString());
+  if (isNaN(nwords)) throw new Error();
+} catch (e) {
+  console.log(`Got invalid number of words: "${nwords}", expected a number eg "4"`);
+  process.exit(1);
+}
+
+const verbose = process.argv[3] === "--verbose";
+
+verbose && console.log(`Creating a random phonetic phrase with ${nwords} words`);
+
+////////////////////////////////////////
+// Define helper function
+
+const word = () => {
+  const getRandomByte = () => Math.floor(Math.random() * 256);
   const i = getRandomByte() * 3;
   const j = getRandomByte() * 3;
   const name = `${prefixes.substring(i, i+3)}${suffixes.substring(j, j+3)}`;
-  console.log(`${i} + ${j} = ${name}`)
+  verbose && console.log(`${i} + ${j} = ${name}`)
   return name;
 };
 
-console.log(`Random name: ${grn()}-${grn()}-${grn()}-${grn()}`)
+////////////////////////////////////////
+// Do the thing
+
+const randomName = Array(nwords).fill(0).map(word).join("-");
+verbose && console.log();
+console.log(randomName)
