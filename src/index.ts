@@ -14,7 +14,7 @@ const suffixes = 'zodnecbudwessevpersutletfulpensytdurwepserwylsunrypsyxdyrnuphe
 ////////////////////////////////////////
 // Parse CLI Args
 
-const nwords = process.argv[2] ? parseInt(process.argv[2]) : 4;
+const nwords = process.argv[2] ? parseInt(process.argv[2]) : 3;
 if (isNaN(nwords)) {
   console.log(`Got invalid number of words: "${nwords}", expected a number eg "4"`);
   process.exit(1);
@@ -44,7 +44,6 @@ if (verbose) {
   console.log();
 }
 
-
 ////////////////////////////////////////
 // Define helper function
 
@@ -60,5 +59,10 @@ const word = (): string => {
 // Do the thing
 
 const randomName = (Array(nwords) as any[]).fill(0).map(word).join("-");
-verbose && console.log();
-console.log(randomName)
+if (verbose) {
+  console.log()
+  console.log(randomName)
+} else {
+  // print without a trailing newline to allow `rphon | copy`
+  process.stdout.write(randomName);
+}
