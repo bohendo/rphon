@@ -22,6 +22,9 @@ if (isNaN(nwords)) {
 
 const verbose = process.argv[3] === "--verbose";
 
+////////////////////////////////////////
+// Print entropy analysis if verbose-mode enabled
+
 if (verbose) {
   const prettyAmt = (amt) => commify(formatUnits(amt, 3));
   const msPerYear = 1000 * 60 * 60 * 24 * 365;
@@ -35,7 +38,7 @@ if (verbose) {
   const btcCrackTime = options.mul(1000).div(BigNumber.from("250000000000000000000")); // ms
   // My cpu was benchmarked at 50k checks/second, round this up to 1M to be safe
   const joeCrackTime = options.mul(1000).div(BigNumber.from("1000000")); // ms
-  // 6.25 BTC per 10 minutes. At $10k/BTC, profit is $6.25k/minute or ~ $100/second
+  // 6.25 BTC per 10 minutes. At $10k/BTC, profit is an opportunity cost of $6.25k/minute or ~ $100/second
   const crackCost = btcCrackTime.mul(BigNumber.from(100));
   console.log(`dictionary of 65536 ^ ${nwords} words = ${sciOptions} options`);
   console.log(`Average Joe could crack this password in ${prettyTime(joeCrackTime)}`);
