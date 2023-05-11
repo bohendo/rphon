@@ -53,7 +53,7 @@
               bashInteractive
               gnumake
               node2nix
-              nodejs-16_x
+              nodejs-18_x
               nodePackages.typescript
             ];
           };

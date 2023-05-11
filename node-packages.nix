@@ -4,15 +4,6 @@
 
 let
   sources = {
-    "@ethersproject/bignumber-5.5.0" = {
-      name = "_at_ethersproject_slash_bignumber";
-      packageName = "@ethersproject/bignumber";
-      version = "5.5.0";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/@ethersproject/bignumber/-/bignumber-5.5.0.tgz";
-        sha512 = "6Xytlwvy6Rn3U3gKEc1vP7nR92frHkv6wtVr95LFR3jREXiCPzdWxKQ1cx4JGQBXxcguAwjA8murlYN2TSiEbg==";
-      };
-    };
     "@ethersproject/bignumber-5.7.0" = {
       name = "_at_ethersproject_slash_bignumber";
       packageName = "@ethersproject/bignumber";
@@ -49,13 +40,13 @@ let
         sha512 = "0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==";
       };
     };
-    "@ethersproject/units-5.5.0" = {
+    "@ethersproject/units-5.7.0" = {
       name = "_at_ethersproject_slash_units";
       packageName = "@ethersproject/units";
-      version = "5.5.0";
+      version = "5.7.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@ethersproject/units/-/units-5.5.0.tgz";
-        sha512 = "7+DpjiZk4v6wrikj+TCyWWa9dXLNU73tSTa7n0TSJDxkYbV3Yf1eRh9ToMLlZtuctNYu9RDNNy2USq3AdqSbag==";
+        url = "https://registry.npmjs.org/@ethersproject/units/-/units-5.7.0.tgz";
+        sha512 = "pD3xLMy3SJu9kG5xDGI7+xhTEmGXlEqXU4OfNapmfnxLVY4EMSSRp7j1k7eezutBPH7RBN/7QPnwR7hzNlEFeg==";
       };
     };
     "@types/node-18.11.9" = {
@@ -65,15 +56,6 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/@types/node/-/node-18.11.9.tgz";
         sha512 = "CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==";
-      };
-    };
-    "bn.js-4.12.0" = {
-      name = "bn.js";
-      packageName = "bn.js";
-      version = "4.12.0";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/bn.js/-/bn.js-4.12.0.tgz";
-        sha512 = "c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==";
       };
     };
     "bn.js-5.2.1" = {
@@ -92,18 +74,13 @@ let
     version = "1.0.0";
     src = ./.;
     dependencies = [
-      sources."@ethersproject/bignumber-5.5.0"
+      sources."@ethersproject/bignumber-5.7.0"
       sources."@ethersproject/bytes-5.7.0"
-      (sources."@ethersproject/constants-5.7.0" // {
-        dependencies = [
-          sources."@ethersproject/bignumber-5.7.0"
-          sources."bn.js-5.2.1"
-        ];
-      })
+      sources."@ethersproject/constants-5.7.0"
       sources."@ethersproject/logger-5.7.0"
-      sources."@ethersproject/units-5.5.0"
+      sources."@ethersproject/units-5.7.0"
       sources."@types/node-18.11.9"
-      sources."bn.js-4.12.0"
+      sources."bn.js-5.2.1"
     ];
     buildInputs = globalBuildInputs;
     meta = {
