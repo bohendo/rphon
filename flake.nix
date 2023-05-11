@@ -51,7 +51,7 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               bashInteractive
-              gnumake
+              just
               node2nix
               nodejs-18_x
               nodePackages.typescript
