@@ -72,7 +72,7 @@ let
     name = "rphon";
     packageName = "rphon";
     version = "1.0.0";
-    src = ./.;
+    src = ./..;
     dependencies = [
       sources."@ethersproject/bignumber-5.7.0"
       sources."@ethersproject/bytes-5.7.0"

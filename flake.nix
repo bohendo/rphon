@@ -6,12 +6,11 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-
   outputs = inputs: with inputs;
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-        node-modules = (pkgs.callPackage ./node-modules.nix {}).shell.nodeDependencies;
+        node-modules = (pkgs.callPackage ./node-modules/default.nix {}).shell.nodeDependencies;
       in
       rec {
 
